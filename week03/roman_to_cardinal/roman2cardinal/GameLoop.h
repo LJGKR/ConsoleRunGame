@@ -62,7 +62,7 @@ namespace Problem_solving
 	}
 	void Input()
 	{
-		
+
 	}
 
 	void Update()
@@ -80,9 +80,9 @@ namespace Problem_solving
 
 			i = romanToInt(roma);
 			for (int i = 0; i < roma.length(); i++) {
-				for(int k=0; k< 7; k++) {   
+				for (int k = 0; k < 7; k++) {
 					if (roma[i] == r[k]) {
-						isFound = true;  
+						isFound = true;
 						break;
 					}
 				}
@@ -103,7 +103,7 @@ namespace Problem_solving
 	}
 	void Release()
 	{
-		
+
 	}
 	class GameLoop
 	{
