@@ -54,7 +54,7 @@ void generateGraph() {
                 int next = i * SIZE + (j - 1);
                 graph[cur].push_back(next);
             }
-
+            
             if (j < SIZE - 1 && map[i][j + 1] != 1) {
                 int next = i * SIZE + (j + 1);
                 graph[cur].push_back(next);
