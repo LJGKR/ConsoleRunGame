@@ -18,8 +18,6 @@ void GotoXY(int x, int y)
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), pos);
 }
 
-
-
 void SetCursor(BOOL bShow)
 {
 	CONSOLE_CURSOR_INFO curInfo;

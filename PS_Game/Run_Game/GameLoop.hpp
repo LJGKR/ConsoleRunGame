@@ -96,7 +96,7 @@ namespace Run_Game {
 			switch (n)
 			{
 			case 1:
-				if (y > 14)
+				if (y > 16)
 				{
 					GotoXY(x - 2, y);
 					printf(" ");
@@ -105,7 +105,7 @@ namespace Run_Game {
 				}
 				break;
 			case 2:
-				if (y < 15)
+				if (y < 17)
 				{
 					GotoXY(x - 2, y);
 					printf(" ");
@@ -114,7 +114,7 @@ namespace Run_Game {
 				}
 				break;
 			case 3:
-				return y - 14;
+				return y - 16;
 			}
 		}
 	}
@@ -228,12 +228,15 @@ namespace Run_Game {
 		{
 			system("cls");
 			GotoXY(15, 8);
-			printf("--------------------------------");
+			printf(" -------------------------------");
 			GotoXY(15, 9);
-			printf("-- 준형이의 모험 (Feat. 진규) --");
+			printf("｜  준형이의 모험 (Feat. 진규) ｜");
 			GotoXY(15, 10);
-			printf("--------------------------------\n");
-			int option = MenuDraw(23, 14);
+			printf(" -------------------------------\n");
+			printf("\n");
+			GotoXY(10, 12);
+			printf("Press 'Space Bar' to select and move character");
+			int option = MenuDraw(23, 16);
 
 			switch (option)
 			{
