@@ -228,6 +228,7 @@ namespace Run_Game {
 		}
 
 		GameManager gamemanager;
+		Scene scene;
 
 
 
@@ -264,6 +265,9 @@ namespace Run_Game {
 		{
 				obstacle.speed += 0.001f;
 				heart.speed += 0.001f;
+				scene.cloud.speed += 0.001f;
+				scene.mountain.speed += 0.001f;
+				scene.airplane.speed += 0.001f;
 		}
 
 

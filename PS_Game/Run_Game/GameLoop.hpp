@@ -202,7 +202,9 @@ namespace Run_Game {
 			if ((Obstacle.obstacle.x + 2 < Player.player.x + 3) && (Obstacle.obstacle.x + 2 > Player.player.x) && (Obstacle.obstacle.y < Player.player.y + 3) && (Obstacle.obstacle.y > Player.player.y) || (Obstacle.obstacle.x + 2 < Player.player.x + 3) && (Obstacle.obstacle.x + 2 > Player.player.x) && (Obstacle.obstacle.y + 3 <= Player.player.y + 3) && (Obstacle.obstacle.y + 3 >= Player.player.y))
 			{
 				Obstacle.obstacle.isactive = false;
-				Obstacle.gamemanager.life--;
+				ispaused = true;
+				isGameOver = true;
+				AddToRanking(Obstacle.gamemanager.score);
 			}
 		}
 
@@ -212,11 +214,6 @@ namespace Run_Game {
 			{
 				Heart.heart.isactive = false;
 				Obstacle.gamemanager.score += 50;
-				Obstacle.gamemanager.life += 1;
-				if (Obstacle.gamemanager.life >= 3)
-				{
-					Obstacle.gamemanager.life = 3;
-				}
 				if (Obstacle.gamemanager.score >= 300)
 				{
 					Obstacle.SpeedUp();
@@ -271,7 +268,6 @@ namespace Run_Game {
 			{
 				isGameRunning = false;  // 메인 화면으로 돌아가기 위해 게임 실행 루프를 재시작
 				isGameOver = false;     // 게임 오버 상태 초기화
-				Obstacle.gamemanager.life = 3;
 				Obstacle.gamemanager.score = 0;
 			}
 		}
@@ -321,12 +317,6 @@ namespace Run_Game {
 				if (ispaused)
 				{
 					continue;
-				}
-				if (Obstacle.gamemanager.life <= 0)
-				{
-					ispaused = true;
-					isGameOver = true;
-					AddToRanking(Obstacle.gamemanager.score);
 				}
 			}
 			Release();
