@@ -262,7 +262,7 @@ namespace Run_Game {
 		}
 
 		void SpeedUp()
-		{
+		{ 
 				obstacle.speed += 0.001f;
 				heart.speed += 0.001f;
 				scene.cloud.speed += 0.001f;
