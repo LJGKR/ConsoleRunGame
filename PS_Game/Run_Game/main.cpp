@@ -14,7 +14,7 @@ int main()
 
 	SetConsoleSize(100, 30);
 	HideCursor();
-	SetConsoleTitle(TEXT("준형이의 모험(Feat.진규)"));
+	SetConsoleTitle(TEXT("그림이의 모험"));
 
 	gameloop.Run();
 }

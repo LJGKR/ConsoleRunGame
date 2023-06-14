@@ -42,7 +42,6 @@ namespace Run_Game {
 
 	class Scene {
 	public:
-		vector<int> obj;
 		struct Cloud
 		{
 			int x;
@@ -72,13 +71,13 @@ namespace Run_Game {
 			if (cloud.isactive == true)
 			{
 				GotoXY(cloud.x, cloud.y);
-				printf("   ⊙   ⊙⊙  ");
+				printf("   \033[38m⊙   ⊙⊙  ");
 				GotoXY(cloud.x, cloud.y + 1);
 				printf(" ⊙⊙⊙⊙⊙⊙⊙⊙⊙⊙  ");
 				GotoXY(cloud.x, cloud.y + 2);
 				printf("  ⊙⊙⊙⊙⊙⊙⊙⊙⊙  ");
 				GotoXY(cloud.x, cloud.y + 3);
-				printf("   ⊙⊙⊙  ⊙    ");
+				printf("   ⊙⊙⊙  ⊙\033[30m    ");
 			}
 		}
 
@@ -111,15 +110,15 @@ namespace Run_Game {
 			if (airplane.isactive == true)
 			{
 				GotoXY(airplane.x, airplane.y);
-				printf("           ●●●");
+				printf("           \033[31m●●●\033[30m");
 				GotoXY(airplane.x, airplane.y + 1);
-				printf(" ●●●     ●●●● ");
+				printf(" ●●●     \033[34m●●●●\033[30m ");
 				GotoXY(airplane.x, airplane.y + 2);
 				printf("●●●●●●●●●●●");
 				GotoXY(airplane.x, airplane.y + 3);
-				printf("         ●●●●");
+				printf("         \033[34m●●●●\033[30m");
 				GotoXY(airplane.x, airplane.y + 4);
-				printf("           ●●●");
+				printf("           \033[31m●●●\033[30m");
 			}
 		}
 
@@ -152,7 +151,7 @@ namespace Run_Game {
 			if (mountain.isactive == true)
 			{
 				GotoXY(mountain.x, mountain.y);
-				printf("          ⊙⊙⊙");
+				printf("          \033[32m⊙⊙⊙");
 				GotoXY(mountain.x, mountain.y + 1);
 				printf("        ⊙⊙⊙⊙⊙⊙⊙");
 				GotoXY(mountain.x, mountain.y + 2);
@@ -160,8 +159,22 @@ namespace Run_Game {
 				GotoXY(mountain.x, mountain.y + 3);
 				printf("    ⊙⊙⊙⊙⊙⊙⊙⊙⊙⊙⊙⊙⊙⊙");
 				GotoXY(mountain.x, mountain.y + 4);
-				printf("  ⊙⊙⊙⊙⊙⊙⊙⊙⊙⊙⊙⊙⊙⊙⊙⊙⊙⊙");
+				printf("  ⊙⊙⊙⊙⊙⊙⊙⊙⊙⊙⊙⊙⊙⊙⊙⊙⊙⊙\033[30m");
 			}
+		}
+
+		void RenderMainScreen()
+		{
+			system("cls");
+			GotoXY(15, 8);
+			printf(" \033[33m-------------------------------");
+			GotoXY(15, 9);
+			printf("｜        \033[36m그림이의 모험\033[33m        ｜");
+			GotoXY(15, 10);
+			printf(" -------------------------------\n");
+			printf("\n");
+			GotoXY(10, 12);
+			printf("Press 'Space Bar' to select and move character");
 		}
 	};
 
@@ -286,7 +299,24 @@ namespace Run_Game {
 			obstacle.isactive = false;
 		}
 
+		void initObstacle2()
+		{
+			obstacle.x = 40;
+			obstacle.y = 18;
+			obstacle.speed = 1.5f;
+			obstacle.isactive = false;
+		}
+
 		void ActiveObstacle()
+		{
+			if (obstacle.isactive == false)
+			{
+				obstacle.x = 40;
+				obstacle.isactive = true;
+			}
+		}
+
+		void ActiveObstacle2()
 		{
 			if (obstacle.isactive == false)
 			{
@@ -298,15 +328,21 @@ namespace Run_Game {
 		void RenderObstacle() {  //오브젝트의 형태
 			if (obstacle.isactive == true)
 			{
-				GotoXY(obstacle.x, obstacle.y);
-				printf("  ▲  ");
-				GotoXY(obstacle.x, obstacle.y + 1);
-				printf("  ■  ");
-				GotoXY(obstacle.x, obstacle.y + 2);
-				printf("  ■  ");
-				GotoXY(obstacle.x, obstacle.y + 3);
-				printf("-----");
+					GotoXY(obstacle.x, obstacle.y);
+					printf("  \033[31m▲\033[30m  ");
+					GotoXY(obstacle.x, obstacle.y + 1);
+					printf("  ■  ");
+					GotoXY(obstacle.x, obstacle.y + 2);
+					printf("  ■  ");
+					GotoXY(obstacle.x, obstacle.y + 3);
+					printf("\033[32m-----\033[30m");
 			}
+		}
+
+		void RenderObstacle2()
+		{
+			GotoXY(obstacle.x, obstacle.y);
+			printf("\033[31m◀\033[30m");
 		}
 
 		struct Heart
@@ -339,7 +375,7 @@ namespace Run_Game {
 			if (heart.isactive == true)
 			{
 				GotoXY(heart.x, heart.y);
-				printf("♥");
+				printf("\033[31m♥\033[30m");
 			}
 		}
 

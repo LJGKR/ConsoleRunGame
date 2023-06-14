@@ -21,9 +21,12 @@ namespace Run_Game {
 	Object Player;
 	Object Obstacle;
 	Object Heart;
+	Object Obstacle2;
 	Scene Cloud;
 	Scene AirPlane;
 	Scene Mountain;
+	Scene screen;
+	//int x;
 
 	struct RankingInfo
 	{
@@ -129,51 +132,62 @@ namespace Run_Game {
 		Heart.initHeart();
 		AirPlane.InitAirPlane();
 		Cloud.InitCloud();
+		//Obstacle2.initObstacle2();
 	}
 
 	void Input()
 	{
-		
+
 		if (!ispaused)
+		{
+			Heart.heart.x -= 1;
+			Mountain.ActiveMountain();
+			Mountain.mountain.x -= Mountain.mountain.speed;
+			if (Mountain.mountain.x <= 0)
 			{
-				Heart.heart.x -= 1;
-				Mountain.ActiveMountain();
-				Mountain.mountain.x -= Mountain.mountain.speed;
-				if (Mountain.mountain.x<= 0)
-				{
-					Mountain.mountain.isactive = false;
-				}
-				Cloud.ActiveCloud();
-				Cloud.cloud.x -= Cloud.cloud.speed;
-				if (Cloud.cloud.x <= 0)
-				{
-					Cloud.cloud.isactive = false;
-				}
-
-				Obstacle.ActiveObstacle();
-				Obstacle.obstacle.x -= Obstacle.obstacle.speed;
-				if (Obstacle.obstacle.x <= 0)
-				{
-					Obstacle.obstacle.isactive = false;
-				}
-				if (Player.player.legstate == false)
-				{
-					Player.player.legstate = true;
-				}
-				else
-				{
-					Player.player.legstate = false;
-				}
-
-				AirPlane.ActiveAirPlane();
-				AirPlane.airplane.x -= AirPlane.airplane.speed;
-				if (AirPlane.airplane.x <= 0)
-				{
-					AirPlane.airplane.isactive = false;
-				}
-
+				Mountain.mountain.isactive = false;
 			}
-		
+			Cloud.ActiveCloud();
+			Cloud.cloud.x -= Cloud.cloud.speed;
+			if (Cloud.cloud.x <= 0)
+			{
+				Cloud.cloud.isactive = false;
+			}
+
+			Obstacle.ActiveObstacle();
+			Obstacle.obstacle.x -= Obstacle.obstacle.speed;
+			if (Obstacle.obstacle.x <= 0)
+			{
+				Obstacle.obstacle.isactive = false;
+				//x = rand() % 10;
+			}
+
+			//Obstacle2.ActiveObstacle2();
+			//Obstacle2.obstacle.x -= Obstacle2.obstacle.speed;
+			//if (Obstacle2.obstacle.x <= 0)
+			//{
+				//Obstacle2.obstacle.isactive = false;
+				//x = rand() % 10;
+			//}
+
+			if (Player.player.legstate == false)
+			{
+				Player.player.legstate = true;
+			}
+			else
+			{
+				Player.player.legstate = false;
+			}
+
+			AirPlane.ActiveAirPlane();
+			AirPlane.airplane.x -= AirPlane.airplane.speed;
+			if (AirPlane.airplane.x <= 0)
+			{
+				AirPlane.airplane.isactive = false;
+			}
+
+		}
+
 
 		if (GetAsyncKeyState(VK_SPACE) && Player.player.isBottom == true)
 		{
@@ -195,6 +209,7 @@ namespace Run_Game {
 			}
 		}
 	}
+
 	void Update()
 	{
 		if (Obstacle.obstacle.isactive)
@@ -221,21 +236,23 @@ namespace Run_Game {
 			}
 		}
 
+		if (Obstacle2.obstacle.isactive)
+		{
+			if ((Obstacle2.obstacle.x < Player.player.x + 3) && (Obstacle2.obstacle.x > Player.player.x) && (Obstacle2.obstacle.y >= Player.player.y))
+			{
+				Obstacle2.obstacle.isactive = false;
+				ispaused = true;
+				isGameOver = true;
+				AddToRanking(Obstacle.gamemanager.score);
+			}
+		}
+
 	}
 	void Render()
 	{
 		while (!isGameRunning)
 		{
-			system("cls");
-			GotoXY(15, 8);
-			printf(" -------------------------------");
-			GotoXY(15, 9);
-			printf("｜  준형이의 모험 (Feat. 진규) ｜");
-			GotoXY(15, 10);
-			printf(" -------------------------------\n");
-			printf("\n");
-			GotoXY(10, 12);
-			printf("Press 'Space Bar' to select and move character");
+			screen.RenderMainScreen();
 			int option = MenuDraw(23, 16);
 
 			switch (option)
@@ -279,6 +296,7 @@ namespace Run_Game {
 			Mountain.RenderMountain();
 			Player.RenderPlayer(Player.player.x, Player.player.y);
 			Obstacle.RenderObstacle();
+			Obstacle2.RenderObstacle2();
 			Cloud.RenderCloud();
 			Player.JBPlayer();
 			Obstacle.RenderData();
