@@ -13,8 +13,6 @@ namespace Run_Game {
 	class GameManager {
 	public :
 		int score = 0;
-		int level;
-		int life;
 		int GameState;
 
 		enum GameState {
@@ -176,6 +174,10 @@ namespace Run_Game {
 			GotoXY(10, 12);
 			printf("Press 'Space Bar' to select and move character");
 		}
+
+		void RenderGameOver() {
+
+		}
 	};
 
 	class Object {
@@ -183,14 +185,14 @@ namespace Run_Game {
 		Object() {}
 		virtual ~Object(){}
 
-		struct Player
+		struct Player  // 플레이어 캐릭터
 		{
 			int x, y;
 			bool isactive;
 			bool legstate;
 			bool isJumping;
 			bool isBottom;
-		}player;
+		}player; //플레이어
 
 		void initPlayer()
 		{
@@ -200,7 +202,7 @@ namespace Run_Game {
 			player.legstate = false;
 			player.isJumping = false;
 			player.isBottom = true;
-		}
+		}  //플레이어 생성
 
 		void RenderPlayer(int x, int y)
 		{
@@ -217,7 +219,7 @@ namespace Run_Game {
 			{
 				printf("／┛");
 			}
-		}
+		}  //플레이어 출력
 		
 		void JBPlayer()
 		{
@@ -238,7 +240,7 @@ namespace Run_Game {
 				player.y = 18;
 				player.isBottom = true;
 			}
-		}
+		}  //플레이어 점프 구현
 
 		GameManager gamemanager;
 		Scene scene;
@@ -247,15 +249,14 @@ namespace Run_Game {
 
 		void initData()
 		{
-			gamemanager.life = 3;
 			gamemanager.GameState = 0;
 			gamemanager.score = 0;
-		}
+		} 
 
 		void RenderData()
 		{
 			GotoXY(1, 1);
-			printf("Player's life : %d\t Score : %d", gamemanager.life, gamemanager.score);
+			printf("Player's life : 1\t Score : %d", gamemanager.score);
 		}
 
 		void RenderGameOver(int x, int y)
@@ -272,7 +273,7 @@ namespace Run_Game {
 				printf("=====================");
 				GotoXY(x, y + 5);
 				printf("==   SCORE : %3d   ==\n", gamemanager.score);
-		}
+		}   //게임 매니저에 넣었어야했는데 ㅎㅎ
 
 		void SpeedUp()
 		{ 
@@ -281,7 +282,7 @@ namespace Run_Game {
 				scene.cloud.speed += 0.001f;
 				scene.mountain.speed += 0.001f;
 				scene.airplane.speed += 0.001f;
-		}
+		}  //계속 속도를 증가시키는 함수
 
 
 		struct Obstacle
@@ -389,6 +390,6 @@ namespace Run_Game {
 					heart.isactive = false;
 				}
 			}
-		}
+		}  //하트를 움직이는 함수
 	};
 }

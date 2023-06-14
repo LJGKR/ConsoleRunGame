@@ -32,7 +32,7 @@ void SetConsoleSize(int x, int y)
 	sprintf_s(modeCmd, sizeof(modeCmd), "mode con cols=%d line=%d", x, y);
 	system(modeCmd);
 	system("color 70");
-}
+}  //콘솔 사이즈 조정
 
 void HideCursor()
 {
@@ -41,7 +41,7 @@ void HideCursor()
 	cursorInfo.bVisible = false;
 
 	SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &cursorInfo);
-}
+}  //커서 숨기기
 
 void SetConsoleSize(int x, int y);
 void HideCursor();

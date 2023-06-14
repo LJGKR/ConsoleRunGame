@@ -46,7 +46,7 @@ namespace Run_Game {
 	void SortRanking()
 	{
 		sort(rankings.begin(), rankings.end(), [](const RankingInfo& a, const RankingInfo& b) {return a.score > b.score; });
-	}
+	} //랭킹 배열 정리
 
 	void PrintRanking()
 	{
@@ -56,13 +56,13 @@ namespace Run_Game {
 		{
 			cout << i + 1 << ". " << rankings[i].playerName << " - " << rankings[i].score << " 점" << endl;
 		}
-	}
+	} //랭킹 출력
 
 	void ShowRanking()
 	{
 		Obstacle.RenderGameOver(15, 8);
 		PrintRanking();
-	}
+	} ///종료 화면 보여주는 함수
 
 	int keyCon()
 	{
